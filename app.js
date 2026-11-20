@@ -404,10 +404,52 @@ function initUtilities() {
 }
 
 // ==========================================================================
+// 4. Video Player & Interactive Chapter Synchronization
+// ==========================================================================
+function initVideoChapters() {
+  const video = document.getElementById("architectureVideo");
+  const chapterBtns = document.querySelectorAll(".chapter-btn");
+
+  if (!video || chapterBtns.length === 0) return;
+
+  chapterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const seekTime = parseFloat(btn.getAttribute("data-seek"));
+      if (!isNaN(seekTime)) {
+        video.currentTime = seekTime;
+        video.play().catch(() => {});
+        updateActiveChapter(seekTime);
+      }
+    });
+  });
+
+  video.addEventListener("timeupdate", () => {
+    const curTime = video.currentTime;
+    updateActiveChapter(curTime);
+  });
+
+  function updateActiveChapter(currentTime) {
+    let currentActive = null;
+    chapterBtns.forEach(btn => {
+      const seekTime = parseFloat(btn.getAttribute("data-seek"));
+      if (currentTime >= seekTime) {
+        currentActive = btn;
+      }
+    });
+
+    if (currentActive) {
+      chapterBtns.forEach(btn => btn.classList.remove("active"));
+      currentActive.classList.add("active");
+    }
+  }
+}
+
+// ==========================================================================
 // App Initialization
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
   initArchitectureCanvas();
   initTerminal();
   initUtilities();
+  initVideoChapters();
 });

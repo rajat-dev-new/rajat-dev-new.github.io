@@ -25,6 +25,7 @@
       <nav class="nav-links" id="navLinks">
         <a href="#about" class="nav-link">About</a>
         <a href="#architecture" class="nav-link">Architecture Lab</a>
+        <a href="#video-briefing" class="nav-link">Video Deep Dive</a>
         <a href="#journey" class="nav-link">Journey</a>
         <a href="#projects" class="nav-link">Case Studies</a>
         <a href="#skills" class="nav-link">Arsenal</a>
@@ -65,17 +66,17 @@
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             Interactive Architecture
           </a>
-          <a href="#projects" class="btn btn-secondary">
+          <a href="#video-briefing" class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            Watch Video Briefing
+          </a>
+          <a href="#projects" class="btn btn-outline">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            View Case Studies
+            Case Studies
           </a>
           <a href="resume.pdf" target="_blank" class="btn btn-outline">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Download CV
-          </a>
-          <a href="mailto:patlerajat94@gmail.com" class="btn btn-outline">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            Contact
           </a>
         </div>
 
@@ -211,7 +212,106 @@
     </div>
   </section>
 
-  <!-- Career Journey Section (The Evolution of an Engineer) -->
+  <!-- Video Architecture Briefing Section -->
+  <section class="section video-section" id="video-briefing">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; width:14px; height:14px; margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Architecture Video Deep Dive
+        </span>
+        <h2 class="section-title">Deterministic Multi-Agent Systems in Production</h2>
+        <p class="section-desc">
+          An in-depth 8-minute architectural walkthrough: closing the gap between probabilistic LLMs and deterministic enterprise systems with LangGraph, schema guardrails, and resilient cloud microservices.
+        </p>
+      </div>
+
+      <div class="video-briefing-grid">
+        <!-- Main Video Card -->
+        <div class="video-player-card">
+          <div class="video-frame-container">
+            <video 
+              id="architectureVideo" 
+              class="architecture-video" 
+              controls 
+              preload="metadata" 
+              playsinline>
+              <source src="architecture_explainer.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-badge-overlay">
+              <span class="pulse-indicator"></span> 4K Explainer &bull; 07:52 min
+            </div>
+          </div>
+          
+          <div class="video-controls-bar">
+            <div class="video-meta-title">
+              <span class="text-cyan font-mono">&gt; SYSTEM_WALKTHROUGH:</span> Deterministic Agentic State Machines
+            </div>
+            <div class="video-source-action">
+              <a href="GEMINI_NOTEBOOK_SOURCE_AGENTIC_AI.md" target="_blank" class="btn btn-sm btn-outline">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Read Source Whitepaper (.md)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Chapter Sidebar & Technical Highlights -->
+        <div class="video-sidebar-card">
+          <div class="sidebar-header">
+            <span class="sidebar-label">TIMESTAMPS &amp; CHAPTERS</span>
+            <span class="sidebar-hint">Click chapter to jump</span>
+          </div>
+
+          <div class="chapter-list">
+            <button class="chapter-btn active" data-seek="0">
+              <span class="chapter-time font-mono">00:00</span>
+              <div class="chapter-info">
+                <span class="chapter-title">The Enterprise AI Dilemma</span>
+                <span class="chapter-desc">Why pure LLMs fail in production: infinite loops, hallucinated tools &amp; state drift.</span>
+              </div>
+            </button>
+
+            <button class="chapter-btn" data-seek="120">
+              <span class="chapter-time font-mono">02:00</span>
+              <div class="chapter-info">
+                <span class="chapter-title">LangGraph Hybrid State Graph</span>
+                <span class="chapter-desc">Cyclic graphs, recursion limits (N=3), and Pydantic schema guardrails.</span>
+              </div>
+            </button>
+
+            <button class="chapter-btn" data-seek="255">
+              <span class="chapter-time font-mono">04:15</span>
+              <div class="chapter-info">
+                <span class="chapter-title">Deterministic Credit Risk Engine</span>
+                <span class="chapter-desc">Pure Python mathematical rules combined with LLM narrative justification.</span>
+              </div>
+            </button>
+
+            <button class="chapter-btn" data-seek="360">
+              <span class="chapter-time font-mono">06:00</span>
+              <div class="chapter-info">
+                <span class="chapter-title">Cloud Hardening &amp; Security</span>
+                <span class="chapter-desc">AWS VPC multi-AZ, Trivy vulnerability audits, Redis cache &amp; IAM boundaries.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="sidebar-footer">
+            <div class="sidebar-stat">
+              <span class="stat-num">100%</span>
+              <span class="stat-text">Deterministic Guardrails</span>
+            </div>
+            <div class="sidebar-stat">
+              <span class="stat-num">&lt;150ms</span>
+              <span class="stat-text">FAISS Vector Retrieval</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="section journey-section" id="journey">
     <div class="container">
       <div class="section-header">
