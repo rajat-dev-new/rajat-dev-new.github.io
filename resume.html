@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rajat Patle — Senior Software Engineer & AI Architect (Resume)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 4mm 6mm 4mm 6mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 7.7pt;
+      line-height: 1.25;
+      color: #1e293b;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Classic Executive Framed Container */
+    .resume-wrapper {
+      width: 100%;
+      border: 1.5px solid #0f172a;
+      outline: 0.5px solid #64748b;
+      outline-offset: -2.5px;
+      padding: 9px 13px;
+      background: #ffffff;
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      border-bottom: 1.2px solid #0f172a;
+      padding-bottom: 4px;
+      margin-bottom: 4.5px;
+    }
+
+    .candidate-name {
+      font-size: 16.5pt;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #0f172a;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 2px;
+    }
+
+    .target-title {
+      font-size: 8.4pt;
+      font-weight: 700;
+      color: #0369a1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .contact-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      font-size: 7.4pt;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .contact-line a {
+      color: #0369a1;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .separator {
+      color: #94a3b8;
+    }
+
+    /* Section Structure */
+    .section {
+      margin-bottom: 4.5px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 8.3pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #0f172a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 1px;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .section-title-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.2pt;
+      font-weight: 600;
+      color: #0284c7;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 0.5px 5px;
+      border-radius: 2px;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 7.5pt;
+      color: #334155;
+      text-align: justify;
+      line-height: 1.25;
+    }
+
+    /* Skills Grid */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.4pt;
+    }
+
+    .skills-table tr {
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .skills-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .skills-table td {
+      padding: 1.2px 0;
+      vertical-align: top;
+    }
+
+    .skill-cat {
+      width: 22%;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .skill-list {
+      width: 78%;
+      color: #334155;
+    }
+
+    /* Experience Entries */
+    .job-entry {
+      margin-bottom: 3.5px;
+    }
+
+    .job-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .job-role {
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 8.1pt;
+    }
+
+    .job-company {
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    .job-meta {
+      font-size: 7.2pt;
+      font-weight: 600;
+      color: #64748b;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .sub-project {
+      margin-top: 1.5px;
+      margin-bottom: 1.5px;
+      padding-left: 5px;
+      border-left: 2px solid #0284c7;
+    }
+
+    .sub-project-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 7.7pt;
+      margin-bottom: 0.5px;
+    }
+
+    .sub-project-title span {
+      font-weight: 500;
+      color: #64748b;
+      font-size: 6.9pt;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    ul.bullet-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 1px;
+      font-size: 7.3pt;
+      color: #334155;
+      line-height: 1.22;
+      text-align: justify;
+    }
+
+    ul.bullet-list li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-size: 7pt;
+      top: -0.5px;
+    }
+
+    /* Keyword Highlighting */
+    strong, b {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Open Source / Projects Showcase */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px 7px;
+      font-size: 7.2pt;
+    }
+
+    .showcase-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 2px solid #0369a1;
+      padding: 2.5px 5px;
+      border-radius: 2px;
+    }
+
+    .showcase-name {
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5px;
+    }
+
+    .showcase-name a {
+      color: #0369a1;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.8pt;
+    }
+
+    .showcase-desc {
+      color: #475569;
+      line-height: 1.18;
+    }
+
+    /* Education & Languages Grid */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 8px;
+      font-size: 7.3pt;
+    }
+
+    .edu-item strong {
+      display: block;
+      color: #0f172a;
+      font-size: 7.5pt;
+    }
+
+    .edu-item span {
+      color: #64748b;
+      font-size: 7.0pt;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="candidate-name">Rajat Patle</h1>
+      <div class="target-title">Senior Software Engineer &bull; AI Architect &bull; Full-Stack Python &bull; Cloud Platform</div>
+      <div class="contact-line">
+        <span>📧 <a href="mailto:patlerajat94@gmail.com">patlerajat94@gmail.com</a></span>
+        <span class="separator">&bull;</span>
+        <span>📞 +91 77097 46527</span>
+        <span class="separator">&bull;</span>
+        <span>📍 Open to Relocation to Sweden (Work Permit Ready)</span>
+      </div>
+      <div class="contact-line" style="margin-top: 1.5px;">
+        <span>🌐 Portfolio: <a href="https://rajat-dev-new.github.io" target="_blank">rajat-dev-new.github.io</a></span>
+        <span class="separator">&bull;</span>
+        <span>💻 GitHub: <a href="https://github.com/rajat-dev-new" target="_blank">github.com/rajat-dev-new</a></span>
+        <span class="separator">&bull;</span>
+        <span>🔗 LinkedIn: <a href="https://linkedin.com/in/rajatpatle" target="_blank">linkedin.com/in/rajatpatle</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Profile -->
+    <section class="section">
+      <div class="section-title">
+        <span>Professional Profile</span>
+        <span class="section-title-tag">6+ Years Production Engineering</span>
+      </div>
+      <p class="summary-text">
+        Senior Software Engineer &amp; AI Architect with <strong>6+ years</strong> of production experience specializing in <strong>Python backend systems</strong>, <strong>FastAPI / Django microservices</strong>, <strong>React</strong>, and enterprise <strong>Agentic AI orchestration (LangGraph, RAG)</strong>. Proven track record preparing production cloud infrastructure on <strong>AWS (VPC, RDS, Redis, CloudWatch, SSM)</strong> and automating <strong>Azure DevOps CI/CD</strong> pipelines. Specialized in constructing <strong>deterministic software guardrails</strong> around probabilistic AI workflows, remediating container security vulnerabilities (<strong>Trivy</strong>), implementing enterprise identity (<strong>Okta OIDC with PKCE</strong>), and collaborating directly with international enterprise stakeholders.
+      </p>
+    </section>
+
+    <!-- Core Technical Competencies -->
+    <section class="section">
+      <div class="section-title">
+        <span>Technical Arsenal</span>
+        <span class="section-title-tag">Core Competencies</span>
+      </div>
+      <table class="skills-table">
+        <tr>
+          <td class="skill-cat">Agentic AI &amp; GenAI:</td>
+          <td class="skill-list">
+            <strong>LangGraph</strong>, Multi-Agent Orchestration, <strong>Tool Calling</strong>, <strong>RAG</strong>, <strong>FAISS</strong>, Vector Databases, Graph Databases, <strong>Ollama / Local LLMs</strong>, Prompt Engineering, Memory &amp; Retrieval Patterns, Model Evaluation, MCP Integrations.
+          </td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Backend &amp; Full-Stack:</td>
+          <td class="skill-list">
+            <strong>Python 3.12+</strong>, <strong>FastAPI</strong>, <strong>Django</strong>, <strong>Django REST Framework (DRF)</strong>, Flask, <strong>SQLAlchemy</strong>, <strong>Pydantic v2</strong>, <strong>PostgreSQL</strong>, MySQL, <strong>Redis</strong>, <strong>pytest (TDD)</strong>, Microservices, RESTful APIs, <strong>React</strong>, JavaScript, HTML5/CSS3.
+          </td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Cloud, Platform &amp; DevOps:</td>
+          <td class="skill-list">
+            <strong>AWS</strong> (<strong>VPC</strong>, <strong>RDS PostgreSQL</strong>, <strong>ElastiCache Redis</strong>, <strong>ECS</strong>, <strong>EFS</strong>, <strong>IAM Least-Privilege</strong>, <strong>CloudWatch</strong>, <strong>SSM</strong>, <strong>Secrets Manager</strong>, <strong>AWS Backup</strong>), <strong>Azure DevOps CI/CD</strong>, <strong>Docker</strong>, <strong>Trivy Container Scanning</strong>, Git, GitHub, GitLab.
+          </td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Security &amp; Architecture:</td>
+          <td class="skill-list">
+            <strong>OAuth 2.0</strong>, <strong>OpenID Connect (OIDC)</strong>, <strong>Okta (Authorization Code + PKCE)</strong>, <strong>Azure AD OIDC</strong>, Container CVE Remediation, Zero-Bastion Topology, Deterministic Financial Rule Engines, RFP-to-BRD Synthesis.
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+      <div class="section-title">
+        <span>Professional Experience</span>
+        <span class="section-title-tag">Career History</span>
+      </div>
+
+      <!-- NTT DATA -->
+      <div class="job-entry">
+        <div class="job-header">
+          <div>
+            <span class="job-role">Software Development Senior Specialist</span> &bull; 
+            <span class="job-company">NTT DATA Information Processing Services Pvt. Ltd.</span>
+          </div>
+          <div class="job-meta">Sep 2025 &mdash; Present | Pune, India</div>
+        </div>
+
+        <!-- Tesseract Forge -->
+        <div class="sub-project">
+          <div class="sub-project-title">Tesseract Forge / NDIL &mdash; Enterprise Agentic SDLC &amp; Requirements Platform <span>[LangGraph &bull; RAG &bull; Okta PKCE]</span></div>
+          <ul class="bullet-list">
+            <li>Architected stateful multi-agent workflows in <strong>LangGraph</strong>, executing automated requirement parsing, <strong>tool calling</strong>, and cyclic verification to synthesize formal Business Requirement Documents (BRDs) from client RFPs.</li>
+            <li>Constructed hybrid <strong>RAG retrieval pipelines</strong> querying dense vector embeddings (<strong>FAISS</strong>) and knowledge graph nodes to ground generated specifications in enterprise compliance standards.</li>
+            <li>Implemented enterprise SSO integrating <strong>Okta OIDC Authorization Code Flow with PKCE</strong>; resolved encoding and character-rendering bottlenecks for Japanese and Traditional Chinese localization.</li>
+            <li>Conducted production telemetry and root-cause debugging across local, staging, and AWS environments utilizing <strong>AWS CloudWatch</strong>, <strong>SSM</strong>, and structured runtime traces.</li>
+          </ul>
+        </div>
+
+        <!-- DENSO -->
+        <div class="sub-project">
+          <div class="sub-project-title">DENSO / Hyper Intelligence &mdash; AWS Production Infrastructure Readiness <span>[AWS VPC &bull; RDS &bull; Redis &bull; Trivy]</span></div>
+          <ul class="bullet-list">
+            <li>Engineered and validated AWS production infrastructure readiness across multi-AZ <strong>VPC</strong>, private routing tables, isolated subnets, and strict <strong>Security Groups</strong> with zero public ingress to the data tier.</li>
+            <li>Configured high-availability <strong>Amazon RDS PostgreSQL</strong> with automated backup retention, <strong>ElastiCache Redis</strong> clustering, <strong>EFS</strong> persistence, and <strong>AWS Secrets Manager</strong> credential rotation.</li>
+            <li>Remediated container image vulnerabilities using automated <strong>Trivy scanning</strong> in build pipelines, eliminating High and Critical CVEs prior to ECS task deployment; enforced <strong>IAM least-privilege</strong> policies.</li>
+          </ul>
+        </div>
+
+        <!-- Munich Re -->
+        <div class="sub-project">
+          <div class="sub-project-title">Munich Re &mdash; Actuarial Movement Analysis Modernization <span>[Python 3.12 &bull; FastAPI &bull; Azure DevOps]</span></div>
+          <ul class="bullet-list">
+            <li>Architected and delivered high-speed <strong>FastAPI / Python 3.12</strong> microservices with <strong>Pydantic v2</strong> and <strong>SQLAlchemy</strong>, modernizing legacy Java calculation pipelines for IFRS 17 actuarial movement waterfalls.</li>
+            <li>Configured <strong>Azure Active Directory OIDC</strong> authentication and automated build/release pipelines in <strong>Azure DevOps CI/CD</strong>, deploying to hardened external Windows servers via <strong>NSSM</strong>.</li>
+          </ul>
+        </div>
+
+        <!-- GenAI Innovation Centre -->
+        <div class="sub-project">
+          <div class="sub-project-title">GenAI Innovation Centre &mdash; Retail Loan Credit Analyst Engine <span>[FastAPI &bull; Deterministic Engine &bull; FAISS]</span></div>
+          <ul class="bullet-list">
+            <li>Engineered a hybrid credit underwriting engine pairing a <strong>100% deterministic Python calculation core</strong> (amortized EMI formulas, regulatory DTI &le; 43%) with local LLMs (<strong>Ollama</strong>) and <strong>FAISS</strong> vector search for qualitative memo synthesis.</li>
+            <li>Guaranteed complete zero-hallucination arithmetic for financial decisions; achieved 100% test coverage using <strong>pytest</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Maaze Underwriting -->
+      <div class="job-entry" style="margin-top: 3px;">
+        <div class="job-header">
+          <div>
+            <span class="job-role">Python Developer</span> &bull; 
+            <span class="job-company">Maaze Underwriting Solution Pvt. Ltd.</span>
+          </div>
+          <div class="job-meta">2023 &mdash; 2025 | India</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Engineered backend insurance underwriting services and RESTful APIs using <strong>Django</strong> and <strong>Django REST Framework (DRF)</strong>, modeling complex policy risk lifecycles.</li>
+          <li>Optimized <strong>PostgreSQL</strong> schema migrations, query plans, and composite indexes, mitigating transaction locks during high-volume policy evaluations; worked directly with underwriting stakeholders to refine specifications.</li>
+        </ul>
+      </div>
+
+      <!-- MateBench Software -->
+      <div class="job-entry" style="margin-top: 3px;">
+        <div class="job-header">
+          <div>
+            <span class="job-role">Software Engineer</span> &bull; 
+            <span class="job-company">MateBench Software Pvt. Ltd.</span>
+          </div>
+          <div class="job-meta">2020 &mdash; 2023 | India</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Developed full-stack web applications for banking and logistics clients using <strong>Python / Django</strong> and <strong>React / JavaScript</strong>, integrating secure payment adapters and establishing automated <strong>pytest</strong> suites.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Key Open-Source Showcases on GitHub -->
+    <section class="section">
+      <div class="section-title">
+        <span>Verified Architecture Showcases</span>
+        <span class="section-title-tag">Open Source Codebases</span>
+      </div>
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-name">
+            <span>LangGraph Agentic SDLC</span>
+            <a href="https://github.com/rajat-dev-new/langgraph-agentic-sdlc" target="_blank">[github.com/.../langgraph-agentic-sdlc]</a>
+          </div>
+          <div class="showcase-desc">Stateful multi-agent requirements pipeline: RFP parser, conditional router, FAISS RAG node &amp; BRD generator in LangGraph.</div>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-name">
+            <span>Credit Analyst Hybrid AI</span>
+            <a href="https://github.com/rajat-dev-new/credit-analyst-hybrid-ai" target="_blank">[github.com/.../credit-analyst-hybrid-ai]</a>
+          </div>
+          <div class="showcase-desc">Hybrid banking underwriting engine: 100% deterministic EMI/DTI rule engine + FAISS semantic search + Streamlit dashboard.</div>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-name">
+            <span>FastAPI Actuarial Service</span>
+            <a href="https://github.com/rajat-dev-new/fastapi-actuarial-microservice" target="_blank">[github.com/.../fastapi-actuarial-microservice]</a>
+          </div>
+          <div class="showcase-desc">IFRS 17 actuarial waterfall microservice in Python 3.12/FastAPI with Pydantic v2 and Azure DevOps CI/CD pipeline.</div>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-name">
+            <span>AWS Production Cloud Blueprint</span>
+            <a href="https://github.com/rajat-dev-new/aws-cloud-production-blueprint" target="_blank">[github.com/.../aws-cloud-production-blueprint]</a>
+          </div>
+          <div class="showcase-desc">Terraform multi-AZ VPC topology, isolated RDS PostgreSQL, ElastiCache Redis, zero-bastion SSM &amp; Trivy container security scans.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Languages -->
+    <section class="section">
+      <div class="section-title">
+        <span>Education &amp; Languages</span>
+        <span class="section-title-tag">Academic &amp; Lingual</span>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-item">
+          <strong>Bachelor of Engineering (B.E.) in Mechanical Engineering</strong>
+          <span>Pimpri Chinchwad College of Engineering, Pune (2016) &bull; First Class</span>
+          <div style="font-size: 6.9pt; color: #475569; margin-top: 0.5px;">
+            Professional Learning: GenAI Academy Yellow Belt Level 1 &bull; Agentic AI Architectures &bull; PostgreSQL Optimization
+          </div>
+        </div>
+        <div class="edu-item">
+          <strong>Language Proficiencies</strong>
+          <div style="font-size: 7.1pt; color: #334155; margin-top: 0.5px; line-height: 1.2;">
+            &bull; <strong>English:</strong> Fluent (Professional Working Proficiency)<br>
+            &bull; <strong>Swedish:</strong> Beginner (Actively learning)<br>
+            &bull; <strong>German:</strong> Elementary (A1) &bull; <strong>Hindi / Marathi:</strong> Native
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
