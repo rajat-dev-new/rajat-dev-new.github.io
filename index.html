@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3.0">
 </head>
 <body class="bg-dark text-light antialiased">
   <!-- Navigation Bar -->
@@ -23,13 +23,11 @@
       </a>
 
       <nav class="nav-links" id="navLinks">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#architecture" class="nav-link">Architecture Lab</a>
-        <a href="#video-briefing" class="nav-link">Video Deep Dive</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#video-briefing" class="nav-link">Video</a>
         <a href="#journey" class="nav-link">Journey</a>
-        <a href="#projects" class="nav-link">Case Studies</a>
+        <a href="#projects" class="nav-link">Projects</a>
         <a href="#skills" class="nav-link">Arsenal</a>
-        <a href="#principles" class="nav-link">Philosophy</a>
         <a href="#terminal" class="nav-link">Terminal</a>
         <a href="#contact" class="nav-link nav-btn-primary">Get in Touch</a>
       </nav>
@@ -68,11 +66,7 @@
           </a>
           <a href="#video-briefing" class="btn btn-secondary">
             <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            Watch Video Briefing
-          </a>
-          <a href="#projects" class="btn btn-outline">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            Case Studies
+            Watch Video Walkthrough
           </a>
           <a href="resume.pdf" target="_blank" class="btn btn-outline">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -226,86 +220,99 @@
         </p>
       </div>
 
-      <div class="video-briefing-grid">
-        <!-- Main Video Card -->
-        <div class="video-player-card">
-          <div class="video-frame-container">
-            <video 
-              id="architectureVideo" 
-              class="architecture-video" 
-              controls 
-              preload="metadata" 
-              playsinline>
-              <source src="architecture_explainer.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-badge-overlay">
-              <span class="pulse-indicator"></span> 4K Explainer &bull; 07:52 min
-            </div>
+      <!-- Unified Architecture Video Studio Card -->
+      <div class="video-studio-card">
+        <div class="video-studio-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
           </div>
-          
-          <div class="video-controls-bar">
-            <div class="video-meta-title">
-              <span class="text-cyan font-mono">&gt; SYSTEM_WALKTHROUGH:</span> Deterministic Agentic State Machines
+          <div class="video-studio-title">stream://deterministic-ai-architecture.mp4</div>
+          <div class="video-studio-badge">4K EXPLAINER &bull; 07:52 MIN</div>
+        </div>
+
+        <div class="video-studio-body">
+          <!-- Left: Constrained Video Player Frame -->
+          <div class="video-viewport">
+            <div class="video-screen-frame">
+              <video 
+                id="architectureVideo" 
+                class="architecture-video" 
+                controls 
+                preload="metadata" 
+                playsinline>
+                <source src="architecture_explainer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
             </div>
-            <div class="video-source-action">
-              <a href="GEMINI_NOTEBOOK_SOURCE_AGENTIC_AI.md" target="_blank" class="btn btn-sm btn-outline">
-                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Read Source Whitepaper (.md)
+            
+            <div class="video-status-strip">
+              <div class="status-strip-left">
+                <span class="pulse-indicator"></span>
+                <span class="strip-text">Deterministic Agentic State Machines</span>
+              </div>
+              <a href="GEMINI_NOTEBOOK_SOURCE_AGENTIC_AI.md" target="_blank" class="strip-link">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                Read Whitepaper
               </a>
             </div>
           </div>
-        </div>
 
-        <!-- Interactive Chapter Sidebar & Technical Highlights -->
-        <div class="video-sidebar-card">
-          <div class="sidebar-header">
-            <span class="sidebar-label">TIMESTAMPS &amp; CHAPTERS</span>
-            <span class="sidebar-hint">Click chapter to jump</span>
-          </div>
-
-          <div class="chapter-list">
-            <button class="chapter-btn active" data-seek="0">
-              <span class="chapter-time font-mono">00:00</span>
-              <div class="chapter-info">
-                <span class="chapter-title">The Enterprise AI Dilemma</span>
-                <span class="chapter-desc">Why pure LLMs fail in production: infinite loops, hallucinated tools &amp; state drift.</span>
-              </div>
-            </button>
-
-            <button class="chapter-btn" data-seek="120">
-              <span class="chapter-time font-mono">02:00</span>
-              <div class="chapter-info">
-                <span class="chapter-title">LangGraph Hybrid State Graph</span>
-                <span class="chapter-desc">Cyclic graphs, recursion limits (N=3), and Pydantic schema guardrails.</span>
-              </div>
-            </button>
-
-            <button class="chapter-btn" data-seek="255">
-              <span class="chapter-time font-mono">04:15</span>
-              <div class="chapter-info">
-                <span class="chapter-title">Deterministic Credit Risk Engine</span>
-                <span class="chapter-desc">Pure Python mathematical rules combined with LLM narrative justification.</span>
-              </div>
-            </button>
-
-            <button class="chapter-btn" data-seek="360">
-              <span class="chapter-time font-mono">06:00</span>
-              <div class="chapter-info">
-                <span class="chapter-title">Cloud Hardening &amp; Security</span>
-                <span class="chapter-desc">AWS VPC multi-AZ, Trivy vulnerability audits, Redis cache &amp; IAM boundaries.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="sidebar-footer">
-            <div class="sidebar-stat">
-              <span class="stat-num">100%</span>
-              <span class="stat-text">Deterministic Guardrails</span>
+          <!-- Right: Chapter Navigation & Technical Metrics -->
+          <div class="video-studio-nav">
+            <div class="studio-nav-header">
+              <span class="nav-header-label">INTERACTIVE CHAPTERS</span>
+              <span class="nav-header-hint">Click to jump</span>
             </div>
-            <div class="sidebar-stat">
-              <span class="stat-num">&lt;150ms</span>
-              <span class="stat-text">FAISS Vector Retrieval</span>
+
+            <div class="chapter-list">
+              <button class="chapter-btn active" data-seek="0">
+                <span class="chapter-time font-mono">00:00</span>
+                <div class="chapter-info">
+                  <span class="chapter-title">The Enterprise AI Dilemma</span>
+                  <span class="chapter-desc">Why pure LLMs fail: infinite loops, hallucinated tools &amp; state drift.</span>
+                </div>
+              </button>
+
+              <button class="chapter-btn" data-seek="120">
+                <span class="chapter-time font-mono">02:00</span>
+                <div class="chapter-info">
+                  <span class="chapter-title">LangGraph Hybrid State Graph</span>
+                  <span class="chapter-desc">Cyclic graphs, recursion limits (N=3), and Pydantic schemas.</span>
+                </div>
+              </button>
+
+              <button class="chapter-btn" data-seek="255">
+                <span class="chapter-time font-mono">04:15</span>
+                <div class="chapter-info">
+                  <span class="chapter-title">Deterministic Credit Risk Engine</span>
+                  <span class="chapter-desc">Pure Python rules combined with LLM narrative justification.</span>
+                </div>
+              </button>
+
+              <button class="chapter-btn" data-seek="360">
+                <span class="chapter-time font-mono">06:00</span>
+                <div class="chapter-info">
+                  <span class="chapter-title">Cloud Hardening &amp; Security</span>
+                  <span class="chapter-desc">AWS VPC multi-AZ, Trivy vulnerability audits, and Redis cache.</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="studio-metrics-grid">
+              <div class="metric-item">
+                <span class="metric-val text-cyan">100%</span>
+                <span class="metric-lbl">Deterministic</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-val text-green">&lt;150ms</span>
+                <span class="metric-lbl">FAISS Vector RAG</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-val text-yellow">N = 3</span>
+                <span class="metric-lbl">Recursion Bound</span>
+              </div>
             </div>
           </div>
         </div>
@@ -926,6 +933,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=3.0"></script>
 </body>
 </html>
