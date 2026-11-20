@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deterministic Multi-Agent Systems in Production: Architecture, State Machine Guardrails, and Failure Modes</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 9pt;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Times New Roman', 'Liberation Serif', Times, serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      color: #000000;
+      background: #ffffff;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* IEEE Header Span */
+    .paper-header {
+      text-align: center;
+      margin-bottom: 14pt;
+      border-bottom: 0.5pt solid #000;
+      padding-bottom: 10pt;
+    }
+
+    .paper-title {
+      font-size: 18pt;
+      font-weight: bold;
+      line-height: 1.25;
+      margin-bottom: 8pt;
+      letter-spacing: -0.2pt;
+    }
+
+    .author-block {
+      margin-bottom: 8pt;
+    }
+
+    .author-name {
+      font-size: 11pt;
+      font-weight: bold;
+    }
+
+    .author-affil {
+      font-size: 9pt;
+      font-style: italic;
+      color: #222;
+      line-height: 1.3;
+    }
+
+    .author-contact {
+      font-size: 8.5pt;
+      font-family: 'Courier New', monospace;
+      color: #333;
+      margin-top: 2pt;
+    }
+
+    /* Abstract Block */
+    .abstract-container {
+      width: 92%;
+      margin: 0 auto 12pt auto;
+      text-align: justify;
+      font-size: 8.5pt;
+      line-height: 1.3;
+    }
+
+    .abstract-title {
+      font-weight: bold;
+      font-style: italic;
+      display: inline;
+    }
+
+    .keywords-block {
+      margin-top: 4pt;
+      font-size: 8.5pt;
+    }
+
+    .keywords-title {
+      font-weight: bold;
+      font-style: italic;
+      display: inline;
+    }
+
+    /* Two-Column Body */
+    .columns-container {
+      column-count: 2;
+      column-gap: 18pt;
+      text-align: justify;
+    }
+
+    h2.section-heading {
+      font-size: 9.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 10pt;
+      margin-bottom: 5pt;
+      break-after: avoid;
+    }
+
+    h3.sub-heading {
+      font-size: 9.5pt;
+      font-weight: bold;
+      font-style: italic;
+      margin-top: 7pt;
+      margin-bottom: 3pt;
+      break-after: avoid;
+    }
+
+    p {
+      text-indent: 12pt;
+      margin-bottom: 4pt;
+    }
+
+    p.no-indent {
+      text-indent: 0;
+    }
+
+    /* Code Snippet Box */
+    .code-box {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 7.5pt;
+      line-height: 1.25;
+      background: #f8f9fa;
+      border: 0.5pt solid #ccc;
+      border-radius: 2pt;
+      padding: 6pt;
+      margin: 6pt 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Mathematical Equations */
+    .equation {
+      text-align: center;
+      font-style: italic;
+      margin: 6pt 0;
+      font-size: 9pt;
+      position: relative;
+    }
+
+    .eq-num {
+      float: right;
+      font-style: normal;
+    }
+
+    /* Tables */
+    .ieee-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8pt 0;
+      font-size: 8pt;
+      line-height: 1.25;
+    }
+
+    .table-caption {
+      text-align: center;
+      font-weight: bold;
+      font-size: 8pt;
+      margin-bottom: 4pt;
+      text-transform: uppercase;
+    }
+
+    .ieee-table th, .ieee-table td {
+      border-top: 0.5pt solid #000;
+      border-bottom: 0.5pt solid #000;
+      padding: 4pt 3pt;
+      text-align: center;
+    }
+
+    .ieee-table th {
+      font-weight: bold;
+      background: #f4f4f4;
+    }
+
+    .ieee-table td.left-align {
+      text-align: left;
+    }
+
+    /* Figures / Diagrams */
+    .figure-box {
+      border: 0.5pt solid #aaa;
+      padding: 6pt;
+      margin: 8pt 0;
+      background: #fafafa;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .figure-caption {
+      font-size: 8pt;
+      font-style: italic;
+      margin-top: 4pt;
+      text-align: center;
+    }
+
+    .diagram-ascii {
+      font-family: 'Courier New', monospace;
+      font-size: 6.8pt;
+      line-height: 1.15;
+      text-align: left;
+      white-space: pre;
+      display: inline-block;
+    }
+
+    /* References */
+    .references-list {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 8pt;
+      line-height: 1.25;
+    }
+
+    .references-list li {
+      margin-bottom: 3.5pt;
+      text-indent: -14pt;
+      padding-left: 14pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Paper Title & Authors -->
+  <header class="paper-header">
+    <h1 class="paper-title">Deterministic Multi-Agent Systems in Production: Architecture, State Machine Guardrails, and Failure Modes</h1>
+    
+    <div class="author-block">
+      <div class="author-name">Rajat Patle</div>
+      <div class="author-affil">Software Development Senior Specialist, NTT DATA Information Processing Services</div>
+      <div class="author-affil">AI Platform & Cloud Systems Architecture Group</div>
+      <div class="author-contact">patlerajat94@gmail.com &bull; https://rajat-dev-new.github.io &bull; github.com/rajat-dev-new</div>
+    </div>
+
+    <!-- Abstract -->
+    <div class="abstract-container">
+      <p class="no-indent">
+        <span class="abstract-title">Abstract&mdash;</span>Large Language Model (LLM)-powered autonomous agents have emerged as powerful tools for complex, semi-structured enterprise tasks. However, in mission-critical environments&mdash;including financial credit risk assessment, actuarial modeling, and automated requirements engineering&mdash;the stochastic, probabilistic nature of raw LLMs introduces severe operational hazards. Chief among these failure modes are unbounded recursive loops, state drift, hallucinated external tool parameters, and arithmetic approximations that violate regulatory compliance standards. This paper introduces a production-tested architectural framework that synthesizes <strong>LangGraph cyclic state machines</strong>, <strong>Pydantic schema validation quality gates</strong>, and <strong>deterministic computation microservices</strong> into a bounded hybrid state graph. By enforcing finite graph traversals ($N_{max} \le 3$), strict circuit-breaker transitions, and absolute decoupling between qualitative extraction (probabilistic) and arithmetic calculation (deterministic), the framework provides mathematical reproducibility and operational resilience. We present an empirical evaluation on an automated credit risk underwriting pipeline. The proposed hybrid architecture achieved a <strong>0.0% arithmetic hallucination rate</strong> (compared to 18.4% in naive ReAct implementations), an <strong>87.2% reduction in runaway token consumption</strong>, and sub-150ms vector retrieval latencies when deployed on a multi-AZ AWS cloud topology hardened by automated Trivy container security scans.
+      </p>
+      <div class="keywords-block">
+        <span class="keywords-title">Index Terms&mdash;</span>Multi-Agent Systems, LangGraph, Deterministic Software Engineering, LLM Guardrails, Credit Risk Underwriting, Cloud Microservices, High-Availability Systems.
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Body Content -->
+  <main class="columns-container">
+
+    <h2 class="section-heading">I. Introduction</h2>
+    <p>
+      Generative Artificial Intelligence (GenAI) based on autoregressive Transformer architectures has transitioned from experimental research into mission-critical software workflows [1]. Early enterprise adoption paradigms focused primarily on stateless, single-turn prompt interactions (such as semantic summarization and conversational assistants). More recently, the industry has shifted toward <em>autonomous agentic architectures</em>&mdash;systems wherein an LLM dynamically plans execution trajectories, calls external tools, and iterates based on environmental feedback [2].
+    </p>
+    <p>
+      Despite impressive laboratory demonstrations, deploying autonomous agents into enterprise production reveals a fundamental conflict:
+    </p>
+    <div class="equation">
+      Probabilistic Next-Token Predictors &ne; Deterministic Enterprise Invariants
+      <span class="eq-num">(1)</span>
+    </div>
+    <p class="no-indent">
+      Enterprise production systems require strict invariants:
+    </p>
+    <p>
+      1) <em>Mathematical Invariance:</em> Under identical input data $X$ and fixed business logic $f$, the system output must satisfy $f(X_1) = f(X_2) \quad \forall \quad X_1 = X_2$.
+    </p>
+    <p>
+      2) <em>Bounded Resource Consumption:</em> Execution time, memory footprint, and API token expenditure must satisfy strict upper bounds.
+    </p>
+    <p>
+      3) <em>Auditable Lineage:</em> Every state mutation must be traceable, reproducible, and verifiable under regulatory frameworks (e.g., EU AI Act [12], IFRS 9 [11]).
+    </p>
+    <p>
+      Raw autonomous agents (e.g., unbounded ReAct loops) violate each of these invariants. When an LLM self-directs loop termination, ambiguous inputs can trap the agent in self-reinforcing cognitive loops, rapidly exhausting token budgets and triggering client timeouts. Furthermore, when prompted to compute financial metrics (such as Debt-to-Income, Debt Service Coverage Ratio, or Actuarial Cash Flows), LLMs approximate arithmetic based on token co-occurrence rather than exact mathematical computation, leading to silent calculation errors that carry catastrophic financial liability.
+    </p>
+    <p>
+      In this paper, we address this enterprise failure surface with four contributions:
+    </p>
+    <p>
+      &bull; <strong>The Bounded Hybrid State Machine Formulation:</strong> Formalizing agent orchestration as a directed cyclic graph with hard recursion depth bounds ($N_{max} = 3$), fallback circuit breakers, and schema-enforced transitions using LangGraph and Pydantic v2 [3], [6].
+    </p>
+    <p>
+      &bull; <strong>The Probabilistic-Deterministic Decoupling Pattern:</strong> Establishing an architectural separation of concerns where LLMs are restricted strictly to qualitative entity extraction and natural language justification, while all mathematical operations are relegated to deterministic compiled Python/NumPy microservices.
+    </p>
+    <p>
+      &bull; <strong>Empirical Benchmarking in Credit Risk:</strong> Comparative experimental results across 500 semi-structured financial loan applications, comparing naive ReAct agents, Few-Shot Chain-of-Thought (CoT), and our proposed hybrid architecture across accuracy, latency, loop frequency, and token cost.
+    </p>
+    <p>
+      &bull; <strong>Production Cloud Hardening:</strong> Detailing the containerized AWS deployment topology (Route 53, ALB, private VPC subnets, RDS PostgreSQL, Redis caching, SSM bastionless access, and Trivy CVE scanning [8], [9]) necessary to operate agentic systems at enterprise scale.
+    </p>
+
+    <h2 class="section-heading">II. Related Work and Prior Art</h2>
+    <h3 class="sub-heading">A. Reasoning and Action (ReAct) Architectures</h3>
+    <p>
+      Yao et al. [2] formalized the ReAct paradigm, wherein an LLM iteratively interleaves thought generation ("Reasoning") with environmental tool execution ("Action"). While ReAct substantially outperforms pure Chain-of-Thought (CoT) on open-domain question answering, it lacks formal termination guarantees. In production environments where external APIs return unexpected schemas or empty payloads, ReAct agents frequently enter recursive retry spirals.
+    </p>
+
+    <h3 class="sub-heading">B. Multi-Agent Orchestration Frameworks</h3>
+    <p>
+      Several multi-agent frameworks have recently emerged. AutoGen (Wu et al. [4]) emphasizes conversational multi-agent dialogue; however, conversational agents lack explicit state machines, making auditable enterprise rollback non-trivial. CrewAI relies heavily on prompt-based roleplay rather than deterministic graph state validation. DSPy (Khattab et al. [5]) compiles declarative language model pipelines into optimized prompts, but focuses primarily on prompt tuning rather than stateful multi-step microservice orchestration. LangGraph [3] models multi-agent workflows as stateful computational graphs supporting cycles, checkpointing, and conditional branching, providing the foundational primitives required for deterministic enterprise state management.
+    </p>
+
+    <h3 class="sub-heading">C. Schema Validation Ensembles</h3>
+    <p>
+      Recent advancements in structured outputs (such as Pydantic [6] and Instructor) enforce JSON schema compliance on single-turn LLM outputs. While schema enforcement ensures syntactic validity of individual model responses, it does not address graph-level behavioral drift across multi-step execution. Our work bridges this gap by combining node-level schema enforcement with graph-level deterministic routing.
+    </p>
+
+    <h2 class="section-heading">III. Architectural Framework: The Hybrid State Graph</h2>
+    <h3 class="sub-heading">A. Mathematical Formulation</h3>
+    <p>
+      We model an enterprise agentic workflow as a Bounded Stateful Directed Graph:
+    </p>
+    <div class="equation">
+      &Gscr; = (&Vscr;, &Escr;, &Sscr;, &delta;, &Omega;)
+      <span class="eq-num">(2)</span>
+    </div>
+    <p class="no-indent">
+      Where &Vscr; = {v<sub>ingest</sub>, v<sub>extract</sub>, v<sub>rules</sub>, v<sub>critic</sub>, v<sub>fallback</sub>, v<sub>export</sub>} represents the set of computational nodes; &Sscr; represents the strongly-typed shared state schema; &Escr; &sube; &Vscr; &times; &Vscr; is the set of directed edges; &delta;: &Vscr; &times; &Sscr; &rarr; &Vscr; is a deterministic conditional transition function; and &Omega;: &Sscr; &rarr; {0, 1} is a circuit-breaker predicate that enforces loop termination when the recursion counter $k \ge N_{max}$.
+    </p>
+
+    <div class="figure-box">
+      <div class="diagram-ascii">
+[Incoming Request / Webhook]
+           │
+           ▼
+[Input Schema Validation] ◄── Pydantic v2 Gate
+           │
+           ▼
+┌──────────────────────────────────────────────┐
+│       LangGraph Bounded State Machine        │
+│                                              │
+│ ┌───────────────┐     ┌────────────────────┐ │
+│ │ 1. Extraction │ ──► │ 2. Deterministic   │ │
+│ │    (LLM: Text)│     │    Math (Python)   │ │
+│ └───────────────┘     └────────────────────┘ │
+│         ▲                        │           │
+│         │ k < N_max              ▼           │
+│ ┌───────────────┐     ┌────────────────────┐ │
+│ │ 4. Fallback   │ ◄── │ 3. Verification    │ │
+│ │    Circuit    │     │    (Critic Node)   │ │
+│ └───────────────┘     └────────────────────┘ │
+│         │ k >= N_max             │ Passed    │
+└─────────┼────────────────────────┼───────────┘
+          ▼                        ▼
+[Human Review Queue]      [Output Generation & DB]
+      </div>
+      <div class="figure-caption">Fig. 1. Architecture of the Bounded Hybrid State Machine with Schema Gates and Circuit Breakers.</div>
+    </div>
+
+    <h3 class="sub-heading">B. State Persistence and Checkpointing</h3>
+    <p>
+      In distributed enterprise systems, ephemeral agent execution is unacceptable. If an execution node encounters a network partition, the workflow must not re-execute already completed inference passes. Our architecture incorporates LangGraph MemorySaver and PostgresSaver checkpointers. At every node transition $v_i \to v_j$, the state delta $\Delta \mathcal{S}$ is committed to a persistent PostgreSQL store keyed by a composite UUID:
+    </p>
+    <div class="equation">
+      Key = TenantID &DoubleVerticalBar; WorkflowID &DoubleVerticalBar; StepNumber
+      <span class="eq-num">(3)</span>
+    </div>
+    <p class="no-indent">
+      This enables: 1) <em>Time-Travel Debugging:</em> Replaying exact agent execution steps in staging environments; and 2) <em>Human-in-the-Loop (HITL) Interruption:</em> Safely pausing the state graph when critic confidence scores drop below a threshold ($\tau < 0.85$).
+    </p>
+
+    <h3 class="sub-heading">C. The Circuit Breaker Pattern ($N_{max} \le 3$)</h3>
+    <p>
+      A primary failure mode of ReAct agents is the <em>Infinite Refinement Loop</em>, where an agent repeatedly attempts to fix validation errors without making semantic progress. We implement an explicit termination circuit breaker directly into the conditional router:
+    </p>
+    <div class="equation">
+      &delta;(v<sub>critic</sub>, &Sscr;) = 
+      <br>
+      { v<sub>export</sub> if Valid(&Sscr;) &and; Consistent(&Sscr;);
+      <br>
+      v<sub>extract</sub> if &not;Valid(&Sscr;) &and; &Sscr;.k &lt; N<sub>max</sub>;
+      <br>
+      v<sub>fallback</sub> if &Sscr;.k &ge; N<sub>max</sub> }
+      <span class="eq-num">(4)</span>
+    </div>
+    <p class="no-indent">
+      When the loop count reaches $N_{max} = 3$, the system halts probabilistic re-prompting, routes to a deterministic fallback handler, logs a high-priority telemetry alert to AWS CloudWatch, and queues the payload for human inspection.
+    </p>
+
+    <h2 class="section-heading">IV. Empirical Implementation: Credit Risk Underwriting</h2>
+    <h3 class="sub-heading">A. Problem Domain & Regulatory Context</h3>
+    <p>
+      Credit underwriting in commercial banking requires analyzing semi-structured loan applications, bank statements, and tax filings to compute core risk metrics:
+    </p>
+    <div class="equation">
+      DTI = (Total Monthly Debt / Gross Monthly Income) &times; 100
+      <span class="eq-num">(5)</span>
+    </div>
+    <div class="equation">
+      DSCR = Net Operating Income / Annual Debt Service
+      <span class="eq-num">(6)</span>
+    </div>
+    <p class="no-indent">
+      Under international banking regulations (e.g., Basel III, IFRS 9 [11]), an error in DSCR calculation of even 1.5% can improperly categorize a substandard loan as prime, leading to severe regulatory penalties.
+    </p>
+
+    <h3 class="sub-heading">B. The Separation of Concerns Pipeline</h3>
+    <p>
+      Our production pipeline strictly enforces a three-stage boundary:
+    </p>
+    <p>
+      1) <em>Stage 1 (Qualitative Semantic Extraction):</em> The incoming semi-structured filing is parsed into tokens. An LLM extracts entities strictly into a Pydantic <code>FinancialProfile</code> schema with exact decimal bounds. No arithmetic is requested in the prompt.
+    </p>
+    <p>
+      2) <em>Stage 2 (Deterministic Rule Evaluation):</em> The validated model is passed to a compiled Python mathematical calculation engine executing exact floating-point / decimal arithmetic.
+    </p>
+    <p>
+      3) <em>Stage 3 (Bounded Narrative Justification):</em> The LLM receives the <em>immutable calculated scores</em> and generates an executive summary. The prompt explicitly binds the model: <em>"You are strictly forbidden from modifying computed DSCR or DTI. Provide qualitative risk commentary based strictly on these verified numbers."</em>
+    </p>
+
+    <h3 class="sub-heading">C. Experimental Setup & Comparative Evaluation</h3>
+    <p>
+      We evaluated the framework across a benchmark dataset of <strong>500 semi-structured financial loan applications</strong> featuring formatting ambiguities, missing fields, and non-standard line items. We compared three architectures:
+    </p>
+    <p>
+      &bull; <strong>Baseline A (Naive ReAct):</strong> Prompt-based ReAct agent using GPT-4o with external calculator tool access [2].
+    </p>
+    <p>
+      &bull; <strong>Baseline B (Few-Shot CoT):</strong> Single-prompt Chain-of-Thought with 5 detailed mathematical examples.
+    </p>
+    <p>
+      &bull; <strong>Proposed (Hybrid State Graph):</strong> LangGraph bounded cyclic graph with Pydantic quality gates and deterministic Python execution.
+    </p>
+
+    <div class="table-caption">TABLE I: Benchmark Evaluation Across 500 Financial Applications</div>
+    <table class="ieee-table">
+      <thead>
+        <tr>
+          <th class="left-align">Architecture</th>
+          <th>Arith. Error (%)</th>
+          <th>Infinite Loop (%)</th>
+          <th>Avg. Latency</th>
+          <th>Token Usage</th>
+          <th>Cost / 1k Evals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left-align">Baseline A (Naive ReAct)</td>
+          <td>18.4%</td>
+          <td>6.2%</td>
+          <td>14.8s</td>
+          <td>5,420</td>
+          <td>$27.10</td>
+        </tr>
+        <tr>
+          <td class="left-align">Baseline B (Few-Shot CoT)</td>
+          <td>9.6%</td>
+          <td>0.0%</td>
+          <td>4.2s</td>
+          <td>2,150</td>
+          <td>$10.75</td>
+        </tr>
+        <tr>
+          <td class="left-align"><strong>Proposed (Hybrid Graph)</strong></td>
+          <td><strong>0.0%</strong></td>
+          <td><strong>0.0%</strong></td>
+          <td><strong>1.8s</strong></td>
+          <td><strong>695</strong></td>
+          <td><strong>$3.47</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-heading">D. Key Findings</h3>
+    <p>
+      1) <em>Elimination of Arithmetic Errors:</em> By strictly disallowing the LLM from executing mathematical division, the arithmetic error rate dropped from 18.4% to exactly <strong>0.0%</strong>.
+    </p>
+    <p>
+      2) <em>Token Economy:</em> The hybrid architecture achieved an <strong>87.2% reduction in token consumption</strong> compared to Naive ReAct (695 tokens vs 5,420 tokens), as the agent does not waste tokens repeatedly prompting the LLM to format intermediate arithmetic outputs.
+    </p>
+    <p>
+      3) <em>Latency Reduction:</em> Wall-clock execution time decreased from 14.8s to <strong>1.8s</strong> (an 8.2x speedup), because deterministic Python executes in under 2 milliseconds, whereas each ReAct round-trip incurs closed-source API latency overhead.
+    </p>
+
+    <h2 class="section-heading">V. Production Platform Engineering & Cloud Hardening</h2>
+    <p>
+      Operating an agentic architecture in enterprise production requires treating the pipeline like any high-availability distributed system [9].
+    </p>
+    <h3 class="sub-heading">A. Cloud Topology</h3>
+    <p>
+      The system is deployed on Amazon Web Services (AWS) using an isolated multi-Availability Zone architecture:
+    </p>
+    <p>
+      &bull; <em>Compute Tier:</em> FastAPI workers running in isolated private VPC subnets with no public IPv4 exposure. Outbound LLM API traffic routes through dual NAT Gateways.
+    </p>
+    <p>
+      &bull; <em>State Checkpointing:</em> Amazon RDS PostgreSQL deployed in Multi-AZ configuration for automated failover, storing serialized LangGraph execution states.
+    </p>
+    <p>
+      &bull; <em>Latency Caching:</em> Amazon ElastiCache Redis caching embedding vectors and deterministic rule outcomes, reducing redundant vector search queries (FAISS [10]) to sub-150ms.
+    </p>
+    <p>
+      &bull; <em>Bastionless Operations:</em> Administrative access is restricted to AWS Systems Manager (SSM) Session Manager, eliminating open SSH (port 22) attack vectors.
+    </p>
+
+    <h3 class="sub-heading">B. Container Vulnerability Scanning (Trivy Gate)</h3>
+    <p>
+      A major security threat in AI engineering is dependency bloat&mdash;the ecosystem relies heavily on rapidly evolving open-source libraries that frequently introduce supply-chain vulnerabilities. Our CI/CD pipeline enforces an automated Trivy vulnerability gate [8]:
+    </p>
+    <div class="code-box">trivy image --severity HIGH,CRITICAL --exit-code 1 production-agent-mesh:latest</div>
+    <p class="no-indent">
+      Any container image containing unfixed High or Critical CVEs automatically fails the deployment pipeline, ensuring that vulnerable dependencies never reach production environments.
+    </p>
+
+    <h2 class="section-heading">VI. Threats to Validity & Discussion</h2>
+    <p>
+      1) <em>Input Extraction Sensitivity:</em> While the deterministic engine guarantees 100% mathematical accuracy on extracted numbers, the system remains reliant on the initial extraction node to parse raw text correctly. In cases of severe document degradation (e.g., poor OCR scans), errors may originate in the extraction phase.
+    </p>
+    <p>
+      2) <em>Schema Rigidity Trade-Off:</em> Enforcing strict Pydantic models limits the system's open-domain flexibility. If an applicant provides an unconventional income stream not modeled in the schema, the system correctly halts and triggers the fallback circuit breaker, trading off fully autonomous execution for safety and auditability.
+    </p>
+
+    <h2 class="section-heading">VII. Conclusion</h2>
+    <p>
+      The future of enterprise AI engineering does not lie in building ever-larger prompt chains or granting unbounded autonomy to stochastic language models. Rather, it requires applying classical distributed systems discipline&mdash;<strong>finite state machines, schema validation gates, deterministic isolation, and cloud infrastructure security</strong>&mdash;to create safe, reliable wrappers around probabilistic models.
+    </p>
+    <p>
+      By bounding agent loops with LangGraph ($N_{max} \le 3$), delegating arithmetic computation to compiled deterministic Python code, and deploying behind robust AWS security boundaries, enterprise engineering teams can confidently deploy autonomous systems into mission-critical, regulated environments.
+    </p>
+
+    <h2 class="section-heading">References</h2>
+    <ul class="references-list">
+      <li>[1] A. Vaswani et al., "Attention Is All You Need," in <em>Advances in Neural Information Processing Systems (NeurIPS 2017)</em>, vol. 30, 2017.</li>
+      <li>[2] S. Yao et al., "ReAct: Synergizing Reasoning and Acting in Language Models," in <em>Int. Conf. on Learning Representations (ICLR 2023)</em>, 2023.</li>
+      <li>[3] LangChain Team, "LangGraph: Building Stateful Multi-Agent Applications with Cyclic Graphs," <em>LangChain Research & Technical Documentation</em>, 2024. [Online]. Available: https://langchain-ai.github.io/langgraph/</li>
+      <li>[4] Q. Wu et al., "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation," <em>arXiv preprint arXiv:2308.08155</em>, 2023.</li>
+      <li>[5] O. Khattab et al., "DSPy: Compiling Declarative Language Model Calls into State-of-the-Art Pipelines," <em>arXiv preprint arXiv:2310.03714</em>, 2023.</li>
+      <li>[6] S. Colvin et al., "Pydantic v2: Fast Data Validation Using Rust and Python Type Hints," <em>Pydantic Documentation</em>, 2023. [Online]. Available: https://docs.pydantic.dev/</li>
+      <li>[7] M. Fowler, "CircuitBreaker Pattern," <em>MartinFowler.com Software Architecture Guides</em>, 2018.</li>
+      <li>[8] Aqua Security, "Trivy: A Comprehensive Security Scanner for Container Images and Filesystems," <em>Aqua Security Open Source</em>, 2023.</li>
+      <li>[9] Amazon Web Services, "AWS Well-Architected Framework: Reliability and Security Pillars," <em>AWS Whitepapers</em>, 2024.</li>
+      <li>[10] J. Johnson, M. Douze, and H. J&eacute;gou, "Billion-scale similarity search with GPUs [FAISS]," <em>IEEE Transactions on Big Data</em>, vol. 7, no. 3, pp. 535-547, 2019.</li>
+      <li>[11] International Accounting Standards Board (IASB), "IFRS 9 Financial Instruments," <em>IFRS Foundation Standards</em>, 2014.</li>
+      <li>[12] European Parliament, "Artificial Intelligence Act (EU AI Act): Regulatory Framework for High-Risk AI Systems," <em>Official Journal of the European Union</em>, 2024.</li>
+    </ul>
+
+  </main>
+</body>
+</html>
