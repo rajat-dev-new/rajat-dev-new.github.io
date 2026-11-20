@@ -248,20 +248,20 @@ function initTerminal() {
   const COMMANDS = {
     help: `
 <span class="text-cyan">Available commands:</span>
-  <span class="text-green">bio</span>          : Professional profile & architectural focus
-  <span class="text-green">skills</span>       : Technical stack breakdown
-  <span class="text-green">langgraph</span>    : Details on LangGraph agent implementations
-  <span class="text-green">projects</span>     : Summary of key enterprise projects
-  <span class="text-green">sweden</span>       : Sweden relocation timeline & status
-  <span class="text-green">contact</span>      : Reach Rajat directly
-  <span class="text-green">clear</span>        : Clear the terminal screen
+  <span class="text-green">bio</span>           : Professional background & systems focus
+  <span class="text-green">skills</span>        : Technical stack breakdown
+  <span class="text-green">langgraph</span>     : LangGraph agentic orchestration specifics
+  <span class="text-green">projects</span>      : Selected enterprise case studies
+  <span class="text-green">architecture</span>  : Core architectural design principles
+  <span class="text-green">contact</span>       : Contact & direct inquiry links
+  <span class="text-green">clear</span>         : Clear the terminal screen
 `,
     bio: `
 <span class="text-cyan">Rajat Patle &mdash; Software Development Senior Specialist @ NTT DATA</span>
 - 6+ years of software engineering & platform architecture experience.
 - Specializes in building reliable production systems around GenAI (LangGraph, RAG).
-- Strong foundation in Python (FastAPI, Django), AWS cloud readiness, and CI/CD.
-- Based in India, actively targeting software/AI engineering opportunities in Sweden.
+- Strong foundation in Python (FastAPI, Django), AWS cloud readiness, and CI/CD pipelines.
+- Extensive experience delivering for international enterprise clients in finance, insurance, and automotive.
 `,
     skills: `
 <span class="text-cyan">[AI & Agents]</span>  LangGraph, RAG, FAISS, Graph DBs, Tool Calling, Ollama, Prompt Eng
@@ -274,22 +274,22 @@ function initTerminal() {
 - Engineered stateful agent graphs with cyclic validation checks and conditional edges.
 - Implemented MemorySaver checkpointing for resumeable agent state across API restarts.
 - Bound tools for automated RFP analysis and deterministic BRD synthesis.
-- Reduced reliance on naive zero-shot prompts by structuring multi-node reasoning passes.
+- Replaced brittle zero-shot prompts with observable multi-step reasoning nodes.
 `,
     projects: `
-<span class="text-cyan">Selected Enterprise Projects:</span>
+<span class="text-cyan">Selected Enterprise Case Studies:</span>
   1. <span class="text-yellow">Tesseract Forge</span>: LangGraph Agentic SDLC & Okta PKCE SSO
   2. <span class="text-yellow">DENSO / Hyper Int.</span>: AWS Production Infrastructure Readiness & Trivy Hardening
-  3. <span class="text-yellow">Munich Re</span>: FastAPI IFRS 17 Calculation Microservices replacing Java
+  3. <span class="text-yellow">Munich Re</span>: FastAPI IFRS 17 Calculation Microservices replacing legacy Java
   4. <span class="text-yellow">Credit Analyst POC</span>: Deterministic Financial Rule Engine + Local Ollama LLM
-  5. <span class="text-yellow">TalkTrack</span>: AI Camera/OCR Application Quality & Release Engineering
+  5. <span class="text-yellow">TalkTrack</span>: Multimodal AI Camera/OCR Application Quality & Release Engineering
 `,
-    sweden: `
-<span class="text-cyan">Sweden Relocation Status:</span>
-- <span class="text-green">Target Locations:</span> Stockholm, Solna, Gothenburg, Malmo, Linkoping (or Remote-SE)
-- <span class="text-green">Work Permit:</span> Requires standard Swedish employment sponsorship (Migrationsverket)
-- <span class="text-green">Mobility:</span> Valid passport, ready to relocate immediately upon permit issuance
-- <span class="text-green">Languages:</span> English (Fluent), German (A1), Swedish (Beginner, actively learning)
+    architecture: `
+<span class="text-cyan">Core Architectural Principles:</span>
+  1. <span class="text-green">Deterministic math over probabilistic hallucination:</span> zero LLM arithmetic for financials.
+  2. <span class="text-green">Observability precedes production:</span> structured logs, CloudWatch metrics & SSM debugging.
+  3. <span class="text-green">Security by topology:</span> isolated subnets, least-privilege IAM & Trivy CVE scanning.
+  4. <span class="text-green">Schema integrity:</span> strict Pydantic contracts and database migrations across services.
 `,
     contact: `
 <span class="text-cyan">Get In Touch:</span>

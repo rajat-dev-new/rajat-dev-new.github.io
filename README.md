@@ -1,6 +1,6 @@
 # Rajat Patle — Senior Software Engineer & AI Architect Portfolio
 
-> Enterprise-grade, interactive developer portfolio showcasing 6+ years of software engineering, agentic AI orchestration (LangGraph, RAG), and production cloud infrastructure (AWS, Azure DevOps). Specifically engineered for Sweden tech recruitment (Stockholm, Solna, Gothenburg).
+> Enterprise-grade, interactive developer portfolio showcasing 6+ years of software engineering, agentic AI orchestration (LangGraph, RAG), and production cloud infrastructure (AWS, Azure DevOps).
 
 ---
 
@@ -24,10 +24,10 @@
    - **TalkTrack:** Multimodal AI quality, OCR, camera capture, and deployment validation.
 
 4. **Interactive CLI Terminal (`#terminal`):**
-   - Functional command line interface supporting `help`, `bio`, `skills`, `langgraph`, `projects`, `sweden`, `contact`, and `clear`.
+   - Functional command line interface supporting `help`, `bio`, `skills`, `langgraph`, `projects`, `architecture`, `contact`, and `clear`.
 
-5. **Sweden Relocation & Fast-Track Hiring CTA (`#contact`):**
-   - Dedicated relocation section detailing work permit readiness, target Swedish cities, and 1-click email invitation links.
+5. **Direct Collaboration & Inquiries (`#contact`):**
+   - Direct engineering communication channels, CV download options, and 1-click email invitation links.
 
 ---
 
@@ -49,30 +49,9 @@ python3 -m http.server 8000
 
 ---
 
-## 🌐 Deployment to GitHub Pages
-
-To deploy directly to your GitHub account (`rajat-dev-new`):
-
-### Option A: User Pages (`rajat-dev-new.github.io`)
-If repository name is `rajat-dev-new.github.io`:
-```bash
-git remote add origin https://github.com/rajat-dev-new/rajat-dev-new.github.io.git
-git branch -M main
-git push -u origin main
-```
-The portfolio will immediately be live at: `https://rajat-dev-new.github.io`
-
-### Option B: Project Pages (`portfolio` or similar)
-```bash
-git remote add origin https://github.com/rajat-dev-new/portfolio.git
-git branch -M main
-git push -u origin main
-```
-Then in GitHub repository settings:
-- Go to **Settings** $\to$ **Pages**
-- Source: **Deploy from a branch**
-- Branch: `main` / `root`
-- Click **Save**
+## 🌐 Live Production URL
+The portfolio is hosted via GitHub Pages at:
+👉 **https://rajat-dev-new.github.io**
 
 ---
 
@@ -80,4 +59,3 @@ Then in GitHub repository settings:
 - **Email:** [patlerajat94@gmail.com](mailto:patlerajat94@gmail.com)
 - **Phone:** +91 77097 46527
 - **GitHub:** [github.com/rajat-dev-new](https://github.com/rajat-dev-new)
-- **Target Location:** Stockholm / Solna / Gothenburg, Sweden

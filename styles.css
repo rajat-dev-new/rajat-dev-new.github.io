@@ -99,67 +99,6 @@ button {
 .text-muted { color: var(--text-muted); }
 .text-center { text-align: center; }
 
-/* Top Relocation Banner */
-.relocation-banner {
-  background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(0, 242, 254, 0.12) 100%);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 10px 0;
-  font-size: 0.88rem;
-}
-
-.banner-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.banner-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-weight: 600;
-  color: #a7f3d0;
-  font-size: 0.78rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.pulse-dot {
-  width: 7px;
-  height: 7px;
-  background-color: var(--accent-green);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--accent-green);
-  animation: pulse-ring 2s infinite;
-}
-
-@keyframes pulse-ring {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.8; }
-}
-
-.banner-text {
-  color: #e2e8f0;
-}
-
-.banner-cta {
-  color: var(--accent-cyan);
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.banner-cta:hover {
-  text-decoration: underline;
-  transform: translateX(2px);
-}
-
 /* Navbar */
 .navbar {
   position: sticky;
@@ -1270,9 +1209,7 @@ button {
   font-size: 0.85em;
 }
 
-/* ==========================================================================
-   Sweden Relocation & Contact Section
-   ========================================================================== */
+/* Contact & Collaboration Section */
 .contact-box {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -1301,7 +1238,7 @@ button {
   margin-bottom: 28px;
 }
 
-.relocation-details {
+.work-mode-details {
   display: flex;
   flex-direction: column;
   gap: 12px;
