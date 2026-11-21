@@ -380,24 +380,43 @@ function initUtilities() {
     });
   }
 
-  // Mobile Toggle
+  // Mobile Toggle & Navigation Drawer
   const toggle = document.getElementById("mobileToggle");
   const navLinks = document.getElementById("navLinks");
 
   if (toggle && navLinks) {
-    toggle.addEventListener("click", () => {
-      if (navLinks.style.display === "flex") {
-        navLinks.style.display = "none";
-      } else {
-        navLinks.style.display = "flex";
-        navLinks.style.flexDirection = "column";
-        navLinks.style.position = "absolute";
-        navLinks.style.top = "72px";
-        navLinks.style.left = "0";
-        navLinks.style.right = "0";
-        navLinks.style.background = "#07090e";
-        navLinks.style.padding = "24px";
-        navLinks.style.borderBottom = "1px solid var(--border-subtle)";
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isActive = navLinks.classList.toggle("active");
+      toggle.classList.toggle("active", isActive);
+      document.body.classList.toggle("menu-open", isActive);
+    });
+
+    // Close mobile menu when any navigation link is clicked
+    const links = navLinks.querySelectorAll(".nav-link");
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        toggle.classList.remove("active");
+        document.body.classList.remove("menu-open");
+      });
+    });
+
+    // Close when tapping outside the menu
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !toggle.contains(e.target) && navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        toggle.classList.remove("active");
+        document.body.classList.remove("menu-open");
+      }
+    });
+
+    // Reset when resizing back to desktop view
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        toggle.classList.remove("active");
+        document.body.classList.remove("menu-open");
       }
     });
   }

@@ -47,6 +47,9 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -55,6 +58,9 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
   background-image: 
     radial-gradient(circle at 15% 10%, rgba(0, 242, 254, 0.04) 0%, transparent 40%),
     radial-gradient(circle at 85% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 40%),
@@ -873,7 +879,7 @@ button {
    ========================================================================== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 28px;
 }
 
@@ -1356,58 +1362,6 @@ button {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .hero-container,
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-specs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-toggle {
-    display: flex;
-  }
-
-  .section-title {
-    font-size: 1.85rem;
-  }
-
-  .hero-title {
-    font-size: 2.1rem;
-  }
-
-  .contact-box {
-    padding: 24px;
-  }
-
-  .timeline-wrapper::before {
-    left: 10px;
-  }
-
-  .timeline-item {
-    padding-left: 36px;
-  }
-
-  .timeline-dot {
-    left: 2px;
-  }
-}
-
-/* ==========================================================================
    Video Architecture Deep Dive Section (Unified Studio Card)
    ========================================================================== */
 .video-section {
@@ -1672,13 +1626,432 @@ button {
   margin-top: 2px;
 }
 
-@media (max-width: 992px) {
+/* ==========================================================================
+   Comprehensive Responsive Architecture (iPads, Tablets & Mobile Phones)
+   ========================================================================== */
+
+/* 1. Large Tablets & iPads in Landscape (1024px and below) */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-title {
+    font-size: 2.35rem;
+  }
+
+  .hero-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .video-studio-card {
+    max-width: 100%;
+  }
+}
+
+/* 2. iPads in Portrait & Mid-size Tablets (900px and below) */
+@media (max-width: 900px) {
+  .mobile-toggle {
+    display: flex;
+    z-index: 1001;
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  .mobile-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    background: rgba(7, 9, 14, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 20px 24px 28px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+  }
+
+  .nav-link:hover, .nav-link:focus {
+    background: rgba(0, 242, 254, 0.08);
+    border-color: var(--border-accent);
+  }
+
+  .nav-btn-primary {
+    text-align: center;
+    margin-top: 8px;
+    padding: 12px 20px !important;
+    font-size: 0.95rem;
+  }
+
   .video-studio-body {
     grid-template-columns: 1fr;
   }
+
   .video-viewport {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .arch-flow-wrapper {
+    justify-content: flex-start;
+    padding: 28px 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+}
+
+/* 3. Phablets & Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-title {
+    font-size: 2.05rem;
+    line-height: 1.25;
+  }
+
+  .contact-box {
+    padding: 24px;
+  }
+
+  .timeline-wrapper::before {
+    left: 12px;
+  }
+
+  .timeline-item {
+    padding-left: 36px;
+    margin-bottom: 32px;
+  }
+
+  .timeline-dot {
+    left: 4px;
+    top: 6px;
+  }
+
+  .timeline-card {
+    padding: 20px 18px;
+  }
+
+  .card-role {
+    font-size: 1.15rem;
+  }
+
+  .card-summary {
+    font-size: 0.88rem;
+  }
+
+  .highlight-item {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+}
+
+/* 4. Small Mobile Phones (640px and below) */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 54px 0;
+  }
+
+  .hero-section {
+    padding: 42px 0 32px;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  .hero-subtext {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .hero-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .spec-card {
+    padding: 12px 10px;
+  }
+
+  .spec-value {
+    font-size: 1.25rem;
+  }
+
+  .spec-label {
+    font-size: 0.68rem;
+  }
+
+  .telemetry-card {
+    border-radius: var(--radius-md);
+  }
+
+  .telemetry-header {
+    padding: 10px 14px;
+  }
+
+  .telemetry-title {
+    font-size: 0.72rem;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .telemetry-body {
+    padding: 14px;
+  }
+
+  .telemetry-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 6px 0;
+  }
+
+  .tele-key {
+    font-size: 0.7rem;
+  }
+
+  .tele-val {
+    font-size: 0.75rem;
+    text-align: left;
+  }
+
+  .telemetry-code-snippet {
+    font-size: 0.7rem;
+    padding: 8px;
+    overflow-x: auto;
+  }
+
+  /* Architecture Tabs on Mobile */
+  .arch-tabs {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .arch-tab-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+
+  .arch-canvas-header {
+    padding: 12px 16px;
+  }
+
+  .arch-info-label {
+    font-size: 0.82rem;
+  }
+
+  .arch-hint {
+    font-size: 0.7rem;
+  }
+
+  /* Video Studio Card Mobile */
+  .video-studio-header {
+    padding: 10px 14px;
+  }
+
+  .video-studio-title {
+    font-size: 0.72rem;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .video-studio-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+  }
+
+  .video-status-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .status-strip-left {
+    font-size: 0.75rem;
+  }
+
+  .status-strip-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .status-strip-actions .strip-link {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .video-studio-nav {
+    padding: 16px 14px;
+  }
+
+  .chapter-btn {
+    padding: 10px 12px;
+    min-height: 48px;
+  }
+
+  .chapter-title {
+    font-size: 0.8rem;
+  }
+
+  .chapter-desc {
+    font-size: 0.7rem;
+  }
+
+  .studio-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding-top: 10px;
+  }
+
+  .metric-item {
+    padding: 6px 4px;
+  }
+
+  .metric-val {
+    font-size: 0.82rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.58rem;
+  }
+
+  /* Projects & Case Studies */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 22px 18px;
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+  }
+
+  .project-desc {
+    font-size: 0.84rem;
+  }
+
+  /* Skills & Arsenal */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .skill-category-card {
+    padding: 22px 18px;
+  }
+
+  /* Terminal Section */
+  .interactive-terminal {
+    border-radius: var(--radius-lg);
+  }
+
+  .terminal-bar {
+    padding: 10px 14px;
+  }
+
+  .terminal-bar-title {
+    font-size: 0.72rem;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .terminal-screen {
+    padding: 16px 14px;
+    font-size: 0.76rem;
+    min-height: 260px;
+  }
+
+  .cmd-chip {
+    padding: 4px 8px;
+    font-size: 0.72rem;
+  }
+
+  /* Footer */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
   }
 }
 
